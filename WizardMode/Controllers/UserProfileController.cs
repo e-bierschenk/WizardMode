@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using System;
 using System.Collections.Generic;
 using WizardMode.Models;
 using WizardMode.Repositories;

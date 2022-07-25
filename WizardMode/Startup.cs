@@ -30,6 +30,9 @@ namespace WizardMode
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IScoreRepository, ScoreRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<IOpdbRepository, OpdbRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
