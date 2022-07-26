@@ -8,6 +8,7 @@ namespace WizardMode.Repositories
         Score GetById(int id);
         List<Score> GetScoresByOpdbId(string machineId);
         List<Score> GetScoresByUserId(int userId);
+        List<Score> GetRecent();
         void Add(Score score);
     }
 }

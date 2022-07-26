@@ -39,8 +39,8 @@ namespace WizardMode.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, ScoreValue, UserProfileId, OpdbId, DateCreated
-                                        FROM Score
+                    cmd.CommandText = @"SELECT Id AS ScoreId, ScoreValue, UserProfileId, OpdbId, DateCreated
+                                        FROM Score s
                                         WHERE UserProfileId = @userId";
                     cmd.Parameters.AddWithValue("@userId", userId);
 
@@ -64,11 +64,37 @@ namespace WizardMode.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, ScoreValue, UserProfileId, OpdbId, DateCreated
-                                        FROM Score
-                                        WHERE OpdbId = @opdbId";
+                    cmd.CommandText = @"SELECT s.Id AS ScoreId, ScoreValue, UserProfileId, OpdbId, DateCreated, Initials
+                                        FROM Score s
+                                   LEFT JOIN UserProfile up ON s.UserProfileId = up.Id
+                                       WHERE OpdbId = @opdbId
+                                       ORDER BY ScoreValue DESC";
                     cmd.Parameters.AddWithValue("@opdbId", machineId);
 
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        List<Score> scores = new List<Score>();
+                        while (reader.Read())
+                        {
+                            scores.Add(BuildScore(reader));
+                        }
+                        return scores;
+                    }
+                }
+            }
+        }
+
+        public List<Score> GetRecent()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT TOP 10 s.Id AS ScoreId, ScoreValue, UserProfileId, OpdbId, DateCreated, Initials
+                                          FROM Score s
+                                     LEFT JOIN UserProfile up ON UserProfileId = up.Id
+                                      ORDER BY DateCreated DESC";
                     using (var reader = cmd.ExecuteReader())
                     {
                         List<Score> scores = new List<Score>();
@@ -106,11 +132,15 @@ namespace WizardMode.Repositories
         {
             return new Score()
             {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Id = reader.GetInt32(reader.GetOrdinal("ScoreId")),
                 ScoreValue = reader.GetInt32(reader.GetOrdinal("ScoreValue")),
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                 OpdbId = reader.GetString(reader.GetOrdinal("OpdbId")),
-                DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated"))
+                DateCreated = reader.GetDateTime(reader.GetOrdinal("DateCreated")),
+                UserProfile = new UserProfile()
+                {
+                    Initials = reader.GetString(reader.GetOrdinal("Initials"))
+                }
             };
         }
     }

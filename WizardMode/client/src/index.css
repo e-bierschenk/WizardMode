@@ -1,8 +1,23 @@
+
+
+:root {
+  --red: #bc412b;
+  --blue: #05a8aa;
+  --green: #b8d5b8;
+  --peach: #d7b49e;
+  --orange: #dc602e;
+
+  --main-font: 'Archivo', sans-serif;
+  --accent-font: 'Righteous', cursive;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  background-color: var(--red);
+  font-family: var(--main-font), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  font-size: 35px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

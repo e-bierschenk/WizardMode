@@ -20,9 +20,9 @@ namespace WizardMode.Repositories
             _apiKey = configuration.GetValue<string>("OpdbApiKey");
         }
 
-        public async Task<List<Machine>> SearchOpdb(string query)
+        public async Task<List<MachineAbbreviated>> SearchOpdb(string query)
         {
-            var uri = $"https://opdb.org/api/search?api_token={_apiKey}&q={query}";
+            var uri = $"https://opdb.org/api/search/typeahead?q={query}";
             var client = new HttpClient();
 
             client.DefaultRequestHeaders
@@ -33,7 +33,7 @@ namespace WizardMode.Repositories
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStreamAsync();
-                var machineData = await JsonSerializer.DeserializeAsync<List<Machine>>(json);
+                var machineData = await JsonSerializer.DeserializeAsync<List<MachineAbbreviated>>(json);
                 
                 return machineData;
             }

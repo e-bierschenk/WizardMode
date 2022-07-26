@@ -7,6 +7,6 @@ namespace WizardMode.Repositories
     public interface IOpdbRepository
     {
         Task<Machine> GetMachineById(string opdbId);
-        Task<List<Machine>> SearchOpdb(string query);
+        Task<List<MachineAbbreviated>> SearchOpdb(string query);
     }
 }

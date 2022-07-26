@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System;
 using WizardMode.Models;
 using WizardMode.Repositories;
 
@@ -35,9 +36,16 @@ namespace WizardMode.Controllers
             return Ok(_scoreRepository.GetScoresByOpdbId(opdbId));
         }
 
+        [HttpGet("GetRecent")]
+        public IActionResult GetRecent()
+        {
+            return Ok(_scoreRepository.GetRecent());
+        }
+
         [HttpPost]
         public IActionResult Add(Score score)
         {
+            score.DateCreated = DateTime.Now;
             _scoreRepository.Add(score);
             return CreatedAtAction(nameof(GetById), new { id = score.Id }, score);
 

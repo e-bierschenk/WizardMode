@@ -7,6 +7,7 @@ using WizardMode.Repositories;
 
 namespace WizardMode.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OpdbController : ControllerBase
