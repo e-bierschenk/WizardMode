@@ -1,0 +1,27 @@
+.searchBar {
+    font-family: var(--main-font);
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--orange);
+    background-color: var(--peach);
+    border: none;
+    border-radius: 2em 0 0 2em;
+    padding-left: .5em;
+}
+
+.searchBar::placeholder {
+    color: var(--orange)
+}
+
+.searchHolder {
+    margin-top: .5em;
+    width: 70%;
+    margin-left: auto;
+    margin-right: 0;
+    border-radius: 2em 0 0 2em;
+    background-color: var(--peach);
+}
+
+input:focus {
+    outline-color: var(--orange);
+}

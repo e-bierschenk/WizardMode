@@ -1,0 +1,16 @@
+.scoreHeader {
+    background-color: var(--peach);
+    font-family: var(--accent-font);
+    color: var(--blue);
+    border-radius: 2em;
+    text-align: center;
+    font-size: 2em;
+    margin: .15em 1em;
+}
+
+.commentBlock {
+    margin: 0 auto;
+    width: 50%;
+    color: var(--green);
+    font-family: var(--accent-font);
+}

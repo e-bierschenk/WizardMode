@@ -16,16 +16,16 @@ export const Nav = ({ isLoggedIn }) => {
             <nav>
                 {isLoggedIn &&
                     <header>
-                        <div>
+                        <div className="headlineBar">
                             <h1>WIZARD MODE</h1>
                         </div>
-                        <div>
-                            <div>
-                                <Link to="/">home</Link>
-                                <Link to="/">my scores</Link>
+                        <div className="linkBar">
+                            <div className="innerDiv">
+                                <Link className="navLink" to="/">home</Link>
+                                <Link className="navLink" to="/">my scores</Link>
                             </div>
-                            <div>
-                                <a href="" onClick={handleLogout}>logout</a>
+                            <div className="innerDiv">
+                                <Link to="" className="navLink" onClick={handleLogout}>logout</Link>
                             </div>
                         </div>
                         <Searchbar />

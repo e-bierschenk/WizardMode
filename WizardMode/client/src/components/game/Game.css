@@ -1,10 +1,31 @@
+.gameContainer {
+    display: flex;
+    margin-top: .5em;
+}
+
+.gameDetailContainer {
+    border: 15px solid var(--peach);
+    border-radius: 2em;
+    margin-left: .5em;
+}
+
 .gameInfo {
-    border-radius: 3px;
-    border: 5px solid var(--peach)
+    display: flex;
+}
+
+.gameTextContainer {
+    color: var(--peach);
+    margin-left: .5em;
 }
 
 .imageDiv {
-
+    margin-top: 1em;
+    margin-left: .25em;
+    margin-bottom: 0;
+    align-items:center;
+    width: 250px;
+    border: 3px solid var(--peach);
+    border-radius: 5px;
 }
 
 img {

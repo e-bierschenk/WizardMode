@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Sidebar } from "../sidebar/Sidebar";
 import { getMachineById } from "../../modules/opdbManager";
 import "./Game.css"
+import { addScore } from "../../modules/scoreManager";
+import { getUserByFirebaseId } from "../../modules/authManager";
 
 
 export const Game = () => {
@@ -24,14 +26,20 @@ export const Game = () => {
 
     const handleScoreInput = (event) => {
         setScore(event.target.value)
-        if(event.key === "Enter")
-        {
+        if (event.key === "Enter") {
             if (score <= 0) {
                 alert("Please enter a number greater than 0.")
             } else {
-                console.log("SUBMIT")
-                console.log(score)
-                setIsEditing(false)
+
+                getUserByFirebaseId().then(userData => {
+                    const scoreToUpload = {
+                        scoreValue: score,
+                        userProfileId: userData.id,
+                        opdbId: id
+                    }
+                    addScore(scoreToUpload)
+                    setIsEditing(false)
+                })
             }
         }
     }
@@ -39,13 +47,21 @@ export const Game = () => {
     return (
         game ?
             <>
-                <Sidebar title={"TOP SCORES"} displayGameName={false} topOrRecent={"top"} />
-                <div className="gameInfo">
-                    <div className="imageDiv"><img src={game.images[0].urls.large}></img></div>
-                    <div><h3>{game.name}</h3></div>
-                    <p>{game.manufacturer.name} - {game.manufacture_date.split("-")[0]}</p>
-                    {isEditing ? 
-                    <input type="number" placeholder="Enter Score Here" onKeyUp={handleScoreInput}></input>: <button onClick={handleClick}>UPLOAD SCORE</button>}
+                <div className="gameContainer">
+                    <Sidebar title={"TOP SCORES"} displayGameName={false} topOrRecent={"top"} />
+                    <div className="gameDetailContainer">
+                        <div className="gameInfo">
+                            <div className="imageDiv"><img src={game.images[0].urls.large}></img></div>
+                            <div className="gameTextContainer">
+                                <div><h3>{game.name}</h3></div>
+                                <p>{game.manufacturer.name} - {game.manufacture_date.split("-")[0]}</p>
+                            </div>
+                        </div>
+                        <div className="buttonContainer">
+                            {isEditing ?
+                                <input type="number" placeholder="Enter Score Here" onKeyUp={handleScoreInput}></input> : <button onClick={handleClick}>UPLOAD SCORE</button>}
+                        </div>
+                    </div>
                 </div>
             </>
             :

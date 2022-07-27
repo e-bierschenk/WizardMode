@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getRecentScores, getTopScores } from "../../modules/scoreManager";
+import "./Sidebar.css"
 
-export const Sidebar = ({title, displayGameName, topOrRecent}) => {
+export const Sidebar = ({ title, displayGameName, topOrRecent }) => {
     const [scores, setScores] = useState([])
     const { id } = useParams();
-    
+
 
     useEffect(() => {
         if (topOrRecent == "recent") {
@@ -17,11 +18,15 @@ export const Sidebar = ({title, displayGameName, topOrRecent}) => {
     }, [])
 
     return (
-        <aside>
-            <h3>{title}</h3>
+        <aside className="sideBar">
+            <h3 className="sideTitle"><b>{title}</b></h3>
             <ul>
                 {scores.map(score =>
-                    <li>{`[${score.userProfile.initials}] ${displayGameName ? score.opdbId : ""} - ${score.scoreValue}`}</li>
+                    <li>
+                        <Link className="sideLinks" to={`/scores/${score.id}`}>
+                            {`[${score.userProfile.initials}] ${displayGameName ? score.opdbId : ""} - ${score.scoreValue}`}
+                        </Link>
+                    </li>
                 )}
             </ul>
         </aside>

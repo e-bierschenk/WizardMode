@@ -16,9 +16,10 @@ namespace WizardMode.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, ScoreValue, UserProfileId, OpdbId, DateCreated
-                                        FROM Score
-                                        WHERE Id = @id";
+                    cmd.CommandText = @"SELECT s.Id AS ScoreId, ScoreValue, UserProfileId, OpdbId, DateCreated, Initials
+                                        FROM Score s
+                                   LEFT JOIN UserProfile up ON s.UserProfileId = up.Id
+                                        WHERE s.Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -39,9 +40,10 @@ namespace WizardMode.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id AS ScoreId, ScoreValue, UserProfileId, OpdbId, DateCreated
+                    cmd.CommandText = @"SELECT s.Id AS ScoreId, ScoreValue, UserProfileId, OpdbId, DateCreated, Initials
                                         FROM Score s
-                                        WHERE UserProfileId = @userId";
+                                   LEFT JOIN UserProfile up ON s.UserProfileId = up.Id
+                                       WHERE UserProfileId = @userId";
                     cmd.Parameters.AddWithValue("@userId", userId);
 
                     using (var reader = cmd.ExecuteReader())

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System;
 using WizardMode.Models;
 using WizardMode.Repositories;
 
@@ -30,6 +31,7 @@ namespace WizardMode.Controllers
         [HttpPost]
         public IActionResult Add(Comment comment)
         {
+            comment.DateCreated = DateTime.Now;
             _commentRepository.Add(comment);
             return CreatedAtAction(nameof(GetById), new {id = comment.Id}, comment);
         }
