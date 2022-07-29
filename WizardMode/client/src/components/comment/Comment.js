@@ -9,6 +9,9 @@ export const Comment = ({ comment, currentUser, updateComments }) => {
     const handleEdit = () => {
         setIsEditing(true)
     }
+    const handleCancel = () => {
+        setIsEditing(false)
+    }
 
     const handleInput = (event) => {
         event.preventDefault()
@@ -18,7 +21,7 @@ export const Comment = ({ comment, currentUser, updateComments }) => {
                 commentText: event.target.value
             }
             setIsEditing(false)
-            editComment(editedComment).then(() => updateComments())  
+            editComment(editedComment).then(() => updateComments())
         } else {
             setCommentText(event.target.value)
         }
@@ -31,7 +34,10 @@ export const Comment = ({ comment, currentUser, updateComments }) => {
         <div className="commentContainer">
             {isEditing ?
                 <>
-                    <p>[{comment.userProfile.initials}] :  </p><input onKeyUp={handleInput} type="text" defaultValue={`${commentText}`}></input>
+                    <p>[{comment.userProfile.initials}] :  </p><input className="commentInput" onKeyUp={handleInput} type="text" defaultValue={`${commentText}`}></input>
+                    <div className="iconContainer">
+                        <img className="icon" src="/images/cancel.svg" onClick={handleCancel} />
+                    </div>
                 </>
                 :
                 <p> [{comment.userProfile.initials}] :  {comment.commentText} </p>
@@ -41,8 +47,12 @@ export const Comment = ({ comment, currentUser, updateComments }) => {
                     ""
                     :
                     <div className="buttonDiv">
-                        <button onClick={handleEdit}>Edit</button>
-                        <button onClick={handleDelete}>Delete</button>
+                        <div className="iconContainer">
+                            <img className="icon" src="/images/edit.svg" onClick={handleEdit} />
+                        </div>
+                        <div className="iconContainer">
+                            <img className="icon" src="/images/trash.svg" onClick={handleDelete} />
+                        </div>
                     </div>
                 :
                 ""}

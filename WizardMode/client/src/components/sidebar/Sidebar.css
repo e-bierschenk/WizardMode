@@ -18,6 +18,9 @@
     color: var(--orange);
 }
 
+li {
+    margin: .5em 0;
+}
 .sideLinks:hover {
     text-decoration: underline;
 }

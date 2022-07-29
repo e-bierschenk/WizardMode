@@ -20,6 +20,10 @@ export const ScoreDetail = () => {
         setIsAdding(true)
     }
 
+    const handleCancel = () => {
+        setIsAdding(false)
+    }
+
     const handleInput = (event) => {
         setNewText(event.target.value)
     }
@@ -68,20 +72,29 @@ export const ScoreDetail = () => {
                     <p>There are no comments on this score, would you like to be the first?</p>
                     :
                     comments.map((comment) =>
-                        <Comment 
-                                key={`comment-${comment.id}`} 
-                                comment={comment} 
-                                currentUser={currentUser} 
-                                updateComments={updateComments} />
+                        <Comment
+                            key={`comment-${comment.id}`}
+                            comment={comment}
+                            currentUser={currentUser}
+                            updateComments={updateComments} />
                     )
                 }
                 {isAdding ?
-                    <>
+                    <div className="newComment">
                         <input type="text" onInput={handleInput} placeholder="Add comment here..."></input>
-                        <button onClick={handleSubmitComment}>Submit Comment</button>
-                    </>
+                        <div className="iconHolder">
+                            <div className="iconContainer">
+                                <img className="icon" src="/images/comment-check.svg" onClick={handleSubmitComment} />
+                            </div>
+                            <div className="iconContainer">
+                                <img className="icon" src="/images/cancel.svg" onClick={handleCancel} />
+                            </div>
+                        </div>
+                    </div>
                     :
-                    <button onClick={handleAddComment}>Add Comment</button>
+                    <div className="addComment" onClick={handleAddComment}>
+                        <p>Add Comment</p>
+                    </div>
                 }
             </div>
         </>

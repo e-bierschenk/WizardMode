@@ -12,7 +12,7 @@ export const Sidebar = ({ title, displayGameName, topOrRecent }) => {
         if (topOrRecent == "recent") {
             getRecentScores().then(apiData => setScores(apiData))
         } else if (topOrRecent == "top") {
-            getTopScores(id).then(apiData => setScores(apiData))
+            getTopScores(id).then(apiData => setScores(apiData.slice(0, 10)))
         }
 
     }, [])

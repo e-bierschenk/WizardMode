@@ -40,5 +40,5 @@ export const addScore = (score) => {
             "Content-Type": "application/json"
         }, 
         body: JSON.stringify(score)
-        })).then(r => r.json()).then(r=> console.log(r))
+        })).then(r => r.json())
 }

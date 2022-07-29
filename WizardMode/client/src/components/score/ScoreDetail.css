@@ -14,3 +14,33 @@
     color: var(--green);
     font-family: var(--accent-font);
 }
+
+.addComment {
+    background-color: var(--blue);
+    border-radius: 2em;
+}
+
+.addComment:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.addComment > p {
+    text-align: center;
+}
+
+.newComment {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.newComment > input {
+    background-color: var(--red);
+    color: var(--peach);
+    font-family: var(--accent-font);
+    font-size: 1em;
+}
+
+.iconHolder {
+    display: flex;
+}

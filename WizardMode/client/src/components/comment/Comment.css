@@ -2,3 +2,30 @@
     display: flex;
     align-items: baseline;
 }
+
+.icon {
+    size: 100%;
+}
+
+.buttonDiv {
+    margin-left: .5em;
+    display: flex;
+}
+
+.iconContainer {
+    margin: 0 .25em;
+    width: 1em;
+}
+
+.iconContainer:hover {
+    cursor: pointer;
+}
+
+.commentInput {
+    font-family: var(--accent-font);
+    color: var(--green);
+    background-color: var(--red);
+    border: none;
+    font-size: 1em;
+    padding-left: .25em;
+}

@@ -14,15 +14,19 @@ export const Game = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        getMachineById(id).then(d => {
-            console.log(d)
-            setGame(d)
-        })
+        getMachineById(id).then(d => setGame(d))
     }, [])
 
-    const handleClick = () => {
-        setIsEditing(true)
+    const handleCancel = () => {
+        setIsEditing(false)
     }
+
+    const handleClick = () => {
+        if(!isEditing) {
+            setIsEditing(true)
+        }
+    }
+
 
     const handleScoreInput = (event) => {
         setScore(event.target.value)
@@ -57,9 +61,14 @@ export const Game = () => {
                                 <p>{game.manufacturer.name} - {game.manufacture_date.split("-")[0]}</p>
                             </div>
                         </div>
-                        <div className="buttonContainer">
+                        <div className="buttonContainer" onClick={handleClick} >
                             {isEditing ?
-                                <input type="number" placeholder="Enter Score Here" onKeyUp={handleScoreInput}></input> : <button onClick={handleClick}>UPLOAD SCORE</button>}
+                                <>
+                                    <input className="scoreInput" type="number" placeholder="Enter Score Here" onKeyUp={handleScoreInput}></input> <div className="iconContainer">
+                                        <img className="icon" src="/images/cancel.svg" onClick={handleCancel} />
+                                    </div>
+                                </>
+                                : <p className="addScore">UPLOAD SCORE</p>}
                         </div>
                     </div>
                 </div>
