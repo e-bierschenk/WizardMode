@@ -1,0 +1,19 @@
+.userDetails {
+    margin: 0 .5em;
+}
+
+.userHeadline {
+    font-family: var(--accent-font);
+    text-align: center;
+    color: var(--peach);
+    margin: .5em auto;
+}
+
+.statsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.littleBlock {
+    display: flex;
+}

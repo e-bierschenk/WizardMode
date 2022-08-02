@@ -34,7 +34,7 @@ export const Searchbar = () => {
                 <input className="searchBar" id="searchInput" type="text" list="pinballMachines" onKeyUp={handlekey} placeholder="search..." />
                 <datalist id="pinballMachines">
                     {machines.map(machine =>
-                        <option id={machine.id}>{machine.text}</option>
+                        <option key={machine.id} id={machine.id}>{machine.text}</option>
                     )}
                 </datalist>
             </div>

@@ -11,6 +11,16 @@ export const getScoreById = (id) => {
         })).then(r => r.json())
 }
 
+export const getScoresByUserId = (id) => {
+    return getToken().then((token) => 
+        fetch(`${_apiUrl}/GetByUser/${id}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+        })).then(r => r.json())
+}
+
 export const getRecentScores = () => {
     return getToken().then((token) => 
         fetch(`${_apiUrl}/GetRecent`, {

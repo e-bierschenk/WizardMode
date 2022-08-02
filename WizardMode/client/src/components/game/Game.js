@@ -13,9 +13,13 @@ export const Game = () => {
     const [isEditing, setIsEditing] = useState(false)
     const { id } = useParams()
 
-    useEffect(() => {
+    const getMachine = (id) => {
         getMachineById(id).then(d => setGame(d))
-    }, [])
+    }
+
+    useEffect(() => {
+        getMachine(id)
+    }, [id])
 
     const handleCancel = () => {
         setIsEditing(false)

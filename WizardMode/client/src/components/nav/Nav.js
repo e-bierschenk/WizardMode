@@ -22,7 +22,7 @@ export const Nav = ({ isLoggedIn }) => {
                         <div className="linkBar">
                             <div className="innerDiv">
                                 <Link className="navLink" to="/">home</Link>
-                                <Link className="navLink" to="/">my scores</Link>
+                                {/* <Link className="navLink" to="/">my scores</Link> */}
                             </div>
                             <div className="innerDiv">
                                 <Link to="" className="navLink" onClick={handleLogout}>logout</Link>

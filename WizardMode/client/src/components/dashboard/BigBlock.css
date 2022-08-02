@@ -1,0 +1,18 @@
+.bigBlock {
+    background-color: var(--green);
+    border-radius: 2em;
+    margin-top: .25em;
+}
+
+.bigBlockTitle {
+    text-align: center;
+    font-family: var(--main-font);
+    color: var(--orange);
+}
+
+.bigBlockText {
+    text-align: center;
+    font-family: var(--accent-font);
+    color: var(--blue);
+    font-size: 4em;
+}
